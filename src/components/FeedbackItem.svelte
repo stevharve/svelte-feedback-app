@@ -1,15 +1,15 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { FeedbackStore } from "../stores";
   import Card from "./Card.svelte";
   import Fa from 'svelte-fa'
   import { faX } from '@fortawesome/free-solid-svg-icons'
 
   export let item
 
-  const dispatch = createEventDispatcher()
-
   const handleDelete = (itemId) => {
-    dispatch('delete-feedback', itemId)
+    FeedbackStore.update((currentFeedback) => {
+      return currentFeedback.filter(item => item.id != itemId)
+    })
   }
 </script>
 
